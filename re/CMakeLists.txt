@@ -1,6 +1,5 @@
 if (APPLE)
-	set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined
-		suppress -flat_namespace -g")
+	set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined suppress -flat_namespace -rdynamic")
 endif(APPLE)
 
 # Add C library
