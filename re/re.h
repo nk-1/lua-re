@@ -21,16 +21,22 @@
 #ifndef _RE_H_
 #define _RE_H_
 
-#include <tarantool/module.h>
 #include <lua.h>
 #include <lualib.h>
 #include <lauxlib.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define PCRE2_CODE_UNIT_WIDTH 8
 
 #include <pcre2.h>
 
 #define ESIZE 256
+
+#ifndef unlikely
+#define unlikely(x) __builtin_expect((x), 0)
+#endif
 
 typedef struct {
 	pcre2_code *code;
