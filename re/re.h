@@ -49,10 +49,11 @@ enum re_methods {
 	RE_GC,
 	RE_MATCH,
 	RE_GROUPS,
+	RE_CONST,
 };
 
 re_t * re_new(PCRE2_SPTR, uint32_t, char *);
 void re_free(re_t *);
-void re_lightuserdata(re_t *, lua_State *, const lua_CFunction[3]);
+void re_lightuserdata(re_t *, lua_State *, const lua_CFunction[4]);
 
 #endif /* _RE_H_ */

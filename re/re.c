@@ -75,7 +75,7 @@ re_free(re_t *re) {
 }
 
 void
-re_lightuserdata(re_t *re, lua_State *L, const lua_CFunction re_methods[3]) {
+re_lightuserdata(re_t *re, lua_State *L, const lua_CFunction re_methods[4]) {
 	lua_pushlightuserdata(L, re);
 	luaL_newmetatable(L, "__tnt_re_lua");
 	lua_pushliteral(L, "__index");
@@ -94,6 +94,9 @@ re_lightuserdata(re_t *re, lua_State *L, const lua_CFunction re_methods[3]) {
 	luaL_newmetatable(L, "__tnt_re_groups");
 	lua_pushliteral(L, "__index");
 	lua_pushcfunction(L, re_methods[RE_GROUPS]);
+	lua_rawset(L, -3);
+	lua_pushliteral(L, "__newindex");
+	lua_pushcfunction(L, re_methods[RE_CONST]);
 	lua_rawset(L, -3);
 	lua_setmetatable(L, -2);
 	lua_rawset(L, -3);

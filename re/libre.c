@@ -30,6 +30,7 @@ static int re_compile(lua_State *);
 static int re_gc(lua_State *);
 static int re_match(lua_State *);
 static int re_groups(lua_State *);
+static int re_const(lua_State *);
 
 static const struct luaL_Reg libre_methods [3] = {
 	{ "compile",    re_compile },
@@ -37,10 +38,11 @@ static const struct luaL_Reg libre_methods [3] = {
 	{ NULL,         NULL       }
 };
 
-static const lua_CFunction re_methods [3] = {
+static const lua_CFunction re_methods [4] = {
 	[RE_GC] = re_gc,
 	[RE_MATCH] = re_match,
-	[RE_GROUPS] = re_groups
+	[RE_GROUPS] = re_groups,
+	[RE_CONST] = re_const
 };
 
 static int
@@ -124,6 +126,10 @@ re_groups(lua_State *L) {
 	return 1;
 }
 
+static int
+re_const(lua_State *L) {
+	RE_CROAK(L, "'groups' object does not support item assignment");
+}
 
 /* functions exported from library */
 LUA_API int
